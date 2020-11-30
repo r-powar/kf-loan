@@ -6,13 +6,21 @@ const cors = require('cors');
 const fileUpload = require('express-fileupload');
 
 const connectDB = require('./config/db');
-const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const moment = require('moment');
+
 
 const app = express();
 
 //Connecting to DB
 connectDB();
+
+//set week start to Monday
+moment.updateLocale('en', {
+    week : {
+        dow : 1
+    }
+});
 
 // enable file uploads
 app.use(fileUpload());
